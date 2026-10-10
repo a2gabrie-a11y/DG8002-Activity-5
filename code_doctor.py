@@ -66,13 +66,25 @@ def run_ticket_booth():
             print("Unknown ticket category.")
             continue
 
-        quantity = int(input("How many tickets? "))   
-        if quantity > available_tickets[category]:   
+        # FIX: keep asking until the customer types a whole number, instead of crashing (ValueError)
+        while True:
+            try:
+                quantity = int(input("How many tickets? "))
+                break
+            except ValueError:
+                print("Invalid input. Please enter a valid whole number.")
+
+        # FIX: reject zero or negative quantities
+        if quantity <= 0:
+            print("Please enter a quantity of 1 or more.")
+            continue
+
+        if quantity > available_tickets[category]:
             print("Not enough tickets available.")
             continue
 
         for _ in range(quantity):
-            order.append(category)                    
+            order.append(category)
         available_tickets[category] -= quantity
         print(f"Added {quantity} {category} ticket(s).")
 
