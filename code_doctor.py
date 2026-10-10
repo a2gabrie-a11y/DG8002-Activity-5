@@ -39,8 +39,11 @@ def apply_discount(subtotal):
     return subtotal
 
 def calculate_total(subtotal):
+    # Calculate the total cost, applying the discount if applicable.
+    # FIX: Use the apply_discount function to calculate the discounted subtotal before adding tax.
+    # FIX: tax is now calculated on the discounted price, not the original subtotal.ge
     discounted = apply_discount(subtotal)
-    return discounted + (subtotal * TAX_RATE)   
+    return discounted + (discounted * TAX_RATE)
 
 
 def print_receipt(order):
@@ -77,5 +80,4 @@ def run_ticket_booth():
 
 
 run_ticket_booth()
-
 
