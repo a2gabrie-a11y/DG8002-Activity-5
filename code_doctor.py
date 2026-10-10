@@ -1,16 +1,18 @@
+# Event Ticket Booth Program
 TICKET_PRICES = {
     "general": 25.00,
     "student": 15.00,
     "vip": 60.00,
 }
-
+# Available tickets for each category
 available_tickets = {
     "general": 12,
     "student": 8,
     "vip": 4,
 }
-
+# refactor the tax rate and discount threshold into constants for easier maintenance
 TAX_RATE = 0.13
+# Customers spending $100 or more receive a 10% discount.
 DISCOUNT_THRESHOLD = 100.00
 
 
@@ -24,16 +26,17 @@ def show_menu():
 def calculate_subtotal(order):
     subtotal = 0
     for item in order:
-        subtotal = TICKET_PRICES[item]    
+        # Add the price of each ticket to the subtotal
+        # FIX: Use the TICKET_PRICES dictionary to get the price of each ticket category.
+        subtotal += TICKET_PRICES[item]
     return subtotal
-
 
 def apply_discount(subtotal):
-    # Customers spending $100 or more receive a 10% discount.
-    if subtotal > DISCOUNT_THRESHOLD:
-        return subtotal * 1.10            
+    # Customers spending more than $100 or equal to $100 receive a 10% discount.
+    # FIX: Check if the subtotal is greater than or equal to the discount threshold and apply the discount accordingly.
+    if subtotal >= DISCOUNT_THRESHOLD:
+        return subtotal * 0.90
     return subtotal
-
 
 def calculate_total(subtotal):
     discounted = apply_discount(subtotal)
